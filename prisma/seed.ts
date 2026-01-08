@@ -2,7 +2,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const { PrismaClient } = require("@prisma/client");
 
-const prismaClient = new PrismaClient();
+const prismaClient = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL,
+    },
+  },
+});
 
 const main = async () => {
   await prismaClient.$transaction(async (tx: any) => {
