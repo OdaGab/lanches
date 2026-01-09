@@ -16,15 +16,17 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
   }
 
   return (
-    <>
-      <Image
-        src={restaurant.avatarImageUrl}
-        alt="Logo"
-        width={100}
-        height={100}
-      />
-      <h2>{restaurant.name}</h2>
-    </>
+    <div className="h-screenflex-col flex items-center justify-center px-6 pt-24">
+      <div className="flex flex-col items-center gap-2">
+        <Image
+          src={restaurant.avatarImageUrl}
+          alt="Logo"
+          width={100}
+          height={100}
+        />
+        <h2>{restaurant.name}</h2>
+      </div>
+    </div>
   );
 };
 
