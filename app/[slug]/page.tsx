@@ -16,7 +16,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
   }
 
   return (
-    <div className="h-screenflex-col flex items-center justify-center px-6 pt-24">
+    <div className="flex h-screen flex-col items-center justify-center px-6 pt-24">
       <div className="flex flex-col items-center gap-2">
         <Image
           src={restaurant.avatarImageUrl}
@@ -25,6 +25,12 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
           height={100}
         />
         <h2>{restaurant.name}</h2>
+      </div>
+      <div className="space-y-2 pt-24 text-center">
+        <h3 className="text-center font-bold">Bem-vindo!</h3>
+        <p className="opacity-70">
+          Explore nosso menu e faça seu pedido online.
+        </p>
       </div>
     </div>
   );
