@@ -40,7 +40,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
             src="/dine_in.png"
             width={78}
             height={78}
-            alt="Para comer aqui"
+            alt="Para comer aqui!"
           ></Image>
 
           <Button variant="secondary" className="rounded-full">
