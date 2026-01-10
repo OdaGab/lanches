@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
 import { db } from "@/lib/prisma";
 
+import ConsumptionMethodOption from "./components/consumption-method-option";
+
 interface RestaurantPageProps {
   params: Promise<{ slug: string }>;
 }
@@ -35,35 +37,21 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
         </p>
       </div>
       <div className="grid grid-cols-2 gap-4 pt-14">
-        <CardContent className="flex flex-col items-center gap-8 p-8">
-          <div className="relative h-[80px] w-[80px]">
-            <Image
-              src="/dine_in.png"
-              fill
-              alt="Para comer aqui!"
-              className="object-contain"
-            />
-          </div>
+        <ConsumptionMethodOption
+          slug={slug}
+          imageUrl="/dine_in.png"
+          imageAlt="Para comer aqui!"
+          buttonText="Para comer aqui!"
+          option="DINE_IN"
+        />
 
-          <Button variant="secondary" className="rounded-full">
-            Para comer aqui!
-          </Button>
-        </CardContent>
-
-        <CardContent className="flex flex-col items-center gap-8 p-8">
-          <div className="relative h-[80px] w-[80px]">
-            <Image
-              src="/takeaway.png"
-              fill
-              alt="Para levar!"
-              className="object-contain"
-            />
-          </div>
-
-          <Button variant="secondary" className="rounded-full">
-            Para levar!
-          </Button>
-        </CardContent>
+        <ConsumptionMethodOption
+          slug={slug}
+          imageUrl="/takeaway.png"
+          imageAlt="Para levar!"
+          buttonText="Para levar!"
+          option="TAKEAWAY"
+        />
       </div>
     </div>
   );
