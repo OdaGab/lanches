@@ -36,6 +36,13 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
       </div>
       <div className="grid grid-cols-2 pt-14">
         <CardContent className="flex flex-col items-center gap-8 p-8">
+          <Image
+            src="/dine_in.png"
+            width={78}
+            height={78}
+            alt="Para comer aqui"
+          ></Image>
+
           <Button variant="secondary" className="rounded-full">
             Para comer aqui!
           </Button>
