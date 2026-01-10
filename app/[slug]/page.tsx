@@ -34,17 +34,34 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
           Explore nosso menu e faça seu pedido online.
         </p>
       </div>
-      <div className="grid grid-cols-2 pt-14">
+      <div className="grid grid-cols-2 gap-4 pt-14">
         <CardContent className="flex flex-col items-center gap-8 p-8">
-          <Image
-            src="/dine_in.png"
-            width={78}
-            height={78}
-            alt="Para comer aqui!"
-          ></Image>
+          <div className="relative h-[80px] w-[80px]">
+            <Image
+              src="/dine_in.png"
+              fill
+              alt="Para comer aqui!"
+              className="object-contain"
+            />
+          </div>
 
           <Button variant="secondary" className="rounded-full">
             Para comer aqui!
+          </Button>
+        </CardContent>
+
+        <CardContent className="flex flex-col items-center gap-8 p-8">
+          <div className="relative h-[80px] w-[80px]">
+            <Image
+              src="/takeaway.png"
+              fill
+              alt="Para levar!"
+              className="object-contain"
+            />
+          </div>
+
+          <Button variant="secondary" className="rounded-full">
+            Para levar!
           </Button>
         </CardContent>
       </div>
