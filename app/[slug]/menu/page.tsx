@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import { db } from "@/lib/prisma";
 
 interface RestaurantmenuPageProps {
@@ -15,19 +17,20 @@ const RestaurantmenuPage = async ({
 }: RestaurantmenuPageProps) => {
   const { slug } = await params;
   const { consumptionMethod } = await searchParams;
+
+  if (!isConsumptionMethodValid(consumptionMethod)) {
+    return notFound();
+  }
+
   const restaurant = await db.restaurant.findUnique({ where: { slug } });
-  const valid = isConsumptionMethodValid(consumptionMethod);
 
   return (
     <div>
       Menu page for restaurant {slug}{" "}
       {restaurant?.name ? `- ${restaurant.name}` : ""} - method:{" "}
-      {valid ? consumptionMethod : "invalid"}
+      {consumptionMethod}
     </div>
   );
 };
 
 export default RestaurantmenuPage;
-
-//http://localhost:3000/fsw-donalds/menu?consumptionMethod=DINE_IN
-//http://localhost:3000/fsw-donalds/menu?consumptionMethod=123
