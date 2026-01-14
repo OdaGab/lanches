@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { db } from "@/lib/prisma";
@@ -24,11 +25,22 @@ const RestaurantmenuPage = async ({
 
   const restaurant = await db.restaurant.findUnique({ where: { slug } });
 
+  if (!restaurant) {
+    return notFound();
+  }
+
   return (
     <div>
-      Menu page for restaurant {slug}{" "}
-      {restaurant?.name ? `- ${restaurant.name}` : ""} - method:{" "}
-      {consumptionMethod}
+      <div>
+        <div className="relative h-[250px] w-full">
+          <Image
+            src={restaurant.coverImageUrl}
+            alt={restaurant.name}
+            fill
+            className="object-cover"
+          />
+        </div>
+      </div>
     </div>
   );
 };
