@@ -1,64 +1,45 @@
-import { ChevronLeftIcon, ScrollTextIcon } from "lucide-react";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
 import { db } from "@/lib/prisma";
 
-interface RestaurantmenuPageProps {
+import RestaurantHeader from "./components/header";
+
+interface RestaurantMenuPageProps {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ consumptionMethod?: string }>;
+  searchParams: Promise<{ consumptionMethod: string }>;
 }
 
-const isConsumptionMethodValid = (consumptionMethod?: string) => {
-  return ["DINE_IN", "TAKEAWAY"].includes(consumptionMethod ?? "");
+const isConsumptionMethodValid = (consumptionMethod: string) => {
+  return ["DINE_IN", "TAKEAWAY"].includes(consumptionMethod.toUpperCase());
 };
 
-const RestaurantmenuPage = async ({
+const RestaurantMenuPage = async ({
   params,
   searchParams,
-}: RestaurantmenuPageProps) => {
+}: RestaurantMenuPageProps) => {
   const { slug } = await params;
   const { consumptionMethod } = await searchParams;
-
   if (!isConsumptionMethodValid(consumptionMethod)) {
     return notFound();
   }
-
-  const restaurant = await db.restaurant.findUnique({ where: { slug } });
-
+  const restaurant = await db.restaurant.findUnique({
+    where: { slug },
+    include: {
+      menuCategories: {
+        include: { products: true },
+      },
+    },
+  });
   if (!restaurant) {
     return notFound();
   }
-
   return (
     <div>
-      <div>
-        <div className="relative h-[250px] w-full">
-          <Button
-            variant="secondary"
-            size="icon"
-            className="absolute left-4 top-4 z-50 rounded-full"
-          >
-            <ChevronLeftIcon />
-          </Button>
-          <Image
-            src={restaurant.coverImageUrl}
-            alt={restaurant.name}
-            fill
-            className="object-cover"
-          />
-        </div>
-        <Button
-          variant="secondary"
-          size="icon"
-          className="absolute right-4 top-4 z-50 rounded-full"
-        >
-          <ScrollTextIcon />
-        </Button>
-      </div>
+      <RestaurantHeader restaurant={restaurant} />
     </div>
   );
 };
 
-export default RestaurantmenuPage;
+export default RestaurantMenuPage;
+
+// http://localhost:3000/fsw-donalds/menu?consumptionMethod=dine_in
