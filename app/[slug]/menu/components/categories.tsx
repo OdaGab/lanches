@@ -2,8 +2,10 @@ import { Restaurant } from "@prisma/client";
 import { ClockIcon } from "lucide-react";
 import Image from "next/image";
 
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+
 interface RestaurantCategoriesProps {
-  restaurant: Restaurant;
+  restaurant: Restaurant & { menuCategories: any[] };
 }
 
 const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
@@ -23,13 +25,20 @@ const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
           </p>
         </div>
       </div>
-      <div className="flex items-center gap-3">
-        {/* Conteúdo adicional aqui */}
-      </div>
+
       <div className="mt-3 flex items-center gap-1 text-xs">
         <ClockIcon size={12} />
         <p>Aberto!</p>
       </div>
+
+      <ScrollArea className="w-full">
+        <div className="flex w-max space-x-6 py-4">
+          {restaurant.menuCategories.map((category) => (
+            <p key={category.id}>{category.name}</p>
+          ))}
+        </div>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
     </div>
   );
 };
