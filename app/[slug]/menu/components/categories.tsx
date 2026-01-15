@@ -1,4 +1,5 @@
 import { Restaurant } from "@prisma/client";
+import { ClockIcon } from "lucide-react";
 import Image from "next/image";
 
 interface RestaurantCategoriesProps {
@@ -7,8 +8,8 @@ interface RestaurantCategoriesProps {
 
 const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
   return (
-    <div className="-mt-10 relative z-50 rounded-t-3xl border bg-white">
-      <div className="flex items-center gap-3 p-5">
+    <div className="relative z-50 -mt-10 rounded-t-3xl border bg-white p-5">
+      <div className="flex items-center gap-3">
         <Image
           src={restaurant.avatarImageUrl}
           alt={restaurant.name}
@@ -21,6 +22,13 @@ const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
             {restaurant.description}
           </p>
         </div>
+      </div>
+      <div className="flex items-center gap-3">
+        {/* Conteúdo adicional aqui */}
+      </div>
+      <div className="mt-3 flex items-center gap-1 text-xs">
+        <ClockIcon size={12} />
+        <p>Aberto!</p>
       </div>
     </div>
   );
