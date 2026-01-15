@@ -7,8 +7,8 @@ interface RestaurantCategoriesProps {
 
 const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
   return (
-    <div className="mt-(-1.5rem) relative z-50 rounded-t-3xl border bg-white">
-      <div className="flex items-center gap-3 p-4">
+    <div className="-mt-10 relative z-50 rounded-t-3xl border bg-white">
+      <div className="flex items-center gap-3 p-5">
         <Image
           src={restaurant.avatarImageUrl}
           alt={restaurant.name}
@@ -17,7 +17,7 @@ const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
         />
         <div>
           <h2 className="text-lg font-semibold">{restaurant.name}</h2>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-xs">
             {restaurant.description}
           </p>
         </div>
